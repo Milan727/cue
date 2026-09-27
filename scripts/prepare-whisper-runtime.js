@@ -167,8 +167,15 @@ async function extractTarWithMaterializedLinks(archivePath, extractionDirectory)
   }
 }
 
+function getCMakeBinary() {
+  if (fs.existsSync('/tmp/cmake/CMake.app/Contents/bin/cmake')) {
+    return '/tmp/cmake/CMake.app/Contents/bin/cmake';
+  }
+  return 'cmake';
+}
+
 function runCMake(argumentsList, workingDirectory) {
-  execFileSync('cmake', argumentsList, {
+  execFileSync(getCMakeBinary(), argumentsList, {
     cwd: workingDirectory,
     env: process.env,
     stdio: 'inherit',

@@ -244,6 +244,9 @@ button:focus { outline: none; }
 }
 .ai-text code { font-family: var(--mono); font-size: 0.92em; }
 .ai-text p code { background: rgba(255,255,255,0.10); padding: 1px 5px; border-radius: 5px; }
+.ai-heading { font-size: 14px; font-weight: 600; color: #7FB0F9; margin: 12px 0 4px; }
+.ai-heading:first-child { margin-top: 0; }
+.ai-math { background: rgba(127, 176, 249, 0.15) !important; color: #bcd4fb !important; padding: 1px 6px; border-radius: 4px; font-family: var(--mono); }
 .ai-caret { display:inline-block; width:7px; height:1.05em; vertical-align:-2px; background: var(--accent); border-radius:1px; animation: blink 1s step-end infinite; margin-left: 2px; }
 .status-line { color: var(--tx-mut); font-size: 13px; margin: 10px 0 2px; }
 #cue-status { display: none; margin: 8px 0 2px; padding: 8px 12px; border-radius: 10px;
