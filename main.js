@@ -855,6 +855,7 @@ async function runFeature(mode, userText) {
           system,
           turns: [{ role: 'user', text: built }],
           imageDataUrl,
+          maxTokens: def.maxTokens,
           onToken: (t) => { if (streamSettled) return; rearm(); send('llm:token', { text: t }); },
           onResponse: settings.provider === publik.PUBLIK_PROVIDER ? (res) => publikNoteHeaders(res && res.headers) : undefined
         }),
@@ -1100,7 +1101,7 @@ ipcMain.handle('whisper:model-import', async (_event, modelId) => {
   if (activeWhisperModelId === modelId) {
     throw new Error('Stop listening before replacing the active model.');
   }
-  const selection = await dialog.showOpenDialog(win, {
+  const selection = await dialog.showOpenDialog({
     title: `Import ggml-${modelId}.bin`,
     properties: ['openFile'],
     filters: [{ name: 'whisper.cpp model', extensions: ['bin'] }]
@@ -1171,7 +1172,7 @@ ipcMain.on('log', (_e, msg) => console.log('[renderer]', msg));
 // The parsed text is RETURNED to the renderer, which drops it into the existing
 // #resume-text / #job-description textareas so settings keep a single source of truth.
 async function pickAndParseDocument() {
-  const res = await dialog.showOpenDialog(win, {
+  const res = await dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [{ name: 'Resume / Job description', extensions: ['pdf', 'docx'] }]
   });
